@@ -1,0 +1,10 @@
+{
+  "name": "react-sandbox",
+  "version": "1.0.0",
+  "devDependencies": {
+    "create-react-app": ""
+  },
+  "scripts": {
+    "create": "create-react-app"
+  }
+}
