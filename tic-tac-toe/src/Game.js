@@ -13,7 +13,7 @@ export default class Game extends React.Component {
   }
 
   handleClick(i) {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
+    const history = this.state.history;
     const squares = history[history.length - 1].slice();
     if (squares[i] || calculateWinner(squares)) return;
 
@@ -27,14 +27,15 @@ export default class Game extends React.Component {
 
   jumpTo(step) {
     this.setState({
+      history: this.state.history.slice(0, step + 1),
       stepNumber: step,
-      xIsNext: (step % 2) === 0
+      xIsNext: !(step % 2)
     });
   }
 
   render() {
     const history = this.state.history;
-    const squares = history[this.state.stepNumber];
+    const squares = history[history.length - 1];
     const winner = calculateWinner(squares);
 
     const moves = history.map((step, move) => {
