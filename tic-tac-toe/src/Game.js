@@ -7,7 +7,7 @@ export default class Game extends React.Component {
     super();
     this.state = {
       history: [Array(9).fill(null)],
-      stepNumber: 0,
+      step: 0,
       xIsNext: true
     };
   }
@@ -16,12 +16,12 @@ export default class Game extends React.Component {
     const history = this.state.history;
     const squares = history[history.length - 1].slice();
 
-    if (squares[i] || calculateWinner(squares)) return;
+    if (squares[i] || judgeWinner(squares)) return;
     squares[i] = this.state.xIsNext ? 'X' : 'O';
 
     this.setState({
       history: history.concat([squares]),
-      stepNumber: this.state.stepNumber + 1,
+      step: this.state.step + 1,
       xIsNext: !this.state.xIsNext
     });
   }
@@ -29,7 +29,7 @@ export default class Game extends React.Component {
   jumpTo(step) {
     this.setState({
       history: this.state.history.slice(0, step + 1),
-      stepNumber: step,
+      step: step,
       xIsNext: !(step % 2)
     });
   }
@@ -38,15 +38,15 @@ export default class Game extends React.Component {
     const history = this.state.history;
     const squares = history[history.length - 1];
 
-    const winner = calculateWinner(squares);
+    const winner = judgeWinner(squares);
     const nextPlayer = this.state.xIsNext ? 'X' : 'O';
     const status = winner ? 'Winner: ' + winner : 'Next player: ' + nextPlayer;
 
-    const moves = history.map((step, move) => {
-          const desc = move ? 'Move #' + move : 'Game start';
+    const steps = history.map((squares, step) => {
+          const desc = step ? 'Move #' + step : 'Game start';
           return (
-            <li key={move}>
-              <nav className="href" onClick={() => this.jumpTo(move)}>{desc}</nav>
+            <li key={step}>
+              <nav className="href" onClick={() => this.jumpTo(step)}>{desc}</nav>
             </li>
           );
         });
@@ -59,15 +59,15 @@ export default class Game extends React.Component {
         />
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <ol>{steps}</ol>
         </div>
       </div>
     );
   }
 }
 
-function calculateWinner(squares) {
-  const lines = [
+function judgeWinner(squares) {
+  const winPatterns = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -77,11 +77,9 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6]
   ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
+  for (let i = 0; i < winPatterns.length; i++) {
+    const [a, b, c] = winPatterns[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) return squares[a];
   }
   return null;
 }
