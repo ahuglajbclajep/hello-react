@@ -15,12 +15,13 @@ export default class Game extends React.Component {
   handleClick(i) {
     const history = this.state.history;
     const squares = history[history.length - 1].slice();
-    if (squares[i] || calculateWinner(squares)) return;
 
+    if (squares[i] || calculateWinner(squares)) return;
     squares[i] = this.state.xIsNext ? 'X' : 'O';
+
     this.setState({
       history: history.concat([squares]),
-      stepNumber: history.length,
+      stepNumber: this.state.stepNumber + 1,
       xIsNext: !this.state.xIsNext
     });
   }
@@ -36,23 +37,19 @@ export default class Game extends React.Component {
   render() {
     const history = this.state.history;
     const squares = history[history.length - 1];
+
     const winner = calculateWinner(squares);
+    const nextPlayer = this.state.xIsNext ? 'X' : 'O';
+    const status = winner ? 'Winner: ' + winner : 'Next player: ' + nextPlayer;
 
     const moves = history.map((step, move) => {
           const desc = move ? 'Move #' + move : 'Game start';
           return (
             <li key={move}>
-              <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+              <nav className="href" onClick={() => this.jumpTo(move)}>{desc}</nav>
             </li>
           );
         });
-
-    let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
-    } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-    }
 
     return (
       <div className="game">
