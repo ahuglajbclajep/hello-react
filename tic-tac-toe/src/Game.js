@@ -39,17 +39,16 @@ export default class Game extends React.Component {
     const squares = history[history.length - 1];
 
     const winner = judgeWinner(squares);
-    const nextPlayer = this.state.xIsNext ? 'X' : 'O';
-    const status = winner ? 'Winner: ' + winner : 'Next player: ' + nextPlayer;
+    const status = winner ? 'Winner: ' + winner :
+        'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
-    const steps = history.map((squares, step) => {
-          const desc = step ? 'Move #' + step : 'Game start';
-          return (
-            <li key={step}>
-              <nav className="href" onClick={() => this.jumpTo(step)}>{desc}</nav>
-            </li>
-          );
-        });
+    const steps = history.map((squares, step) => (
+          <li key={step}>
+            <nav className="href" onClick={() => this.jumpTo(step)}>
+              {step ? 'Move #' + step : 'Game start'}
+            </nav>
+          </li>
+        ));
 
     return (
       <div className="game">
@@ -77,6 +76,7 @@ function judgeWinner(squares) {
     [0, 4, 8],
     [2, 4, 6]
   ];
+
   for (let i = 0; i < winPatterns.length; i++) {
     const [a, b, c] = winPatterns[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) return squares[a];
