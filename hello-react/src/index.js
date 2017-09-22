@@ -1,14 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
-class HelloReact extends Component {
-  render() {
-    return (
-      <div>
-        Hello, react!
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<HelloReact />, document.getElementById('root'));
+ReactDOM.render(<h1>Hello, React!</h1>, document.getElementById('root'));
