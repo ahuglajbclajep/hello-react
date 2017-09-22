@@ -3,8 +3,8 @@ import Board from './Board'
 import './index.css';
 
 export default class Game extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       history: [Array(9).fill(null)],
       step: 0,
@@ -19,19 +19,19 @@ export default class Game extends React.Component {
     if (squares[i] || judgeWinner(squares)) return;
     squares[i] = this.state.xIsNext ? 'X' : 'O';
 
-    this.setState({
+    this.setState((prevState) => ({
       history: history.concat([squares]),
-      step: this.state.step + 1,
-      xIsNext: !this.state.xIsNext
-    });
+      step: prevState.step + 1,
+      xIsNext: !prevState.xIsNext
+    }));
   }
 
   jumpTo(step) {
-    this.setState({
-      history: this.state.history.slice(0, step + 1),
+    this.setState((prevState) => ({
+      history: prevState.history.slice(0, step + 1),
       step: step,
       xIsNext: !(step % 2)
-    });
+    }));
   }
 
   render() {
