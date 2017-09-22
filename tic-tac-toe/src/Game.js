@@ -54,7 +54,7 @@ export default class Game extends React.Component {
       <div className="game">
         <Board
           squares={squares}
-          onClick={(i) => this.handleClick(i)}
+          onClick={i => this.handleClick(i)}
         />
         <div className="game-info">
           <div>{status}</div>
