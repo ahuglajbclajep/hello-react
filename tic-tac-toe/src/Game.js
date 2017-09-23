@@ -52,10 +52,7 @@ export default class Game extends React.Component {
 
     return (
       <div className="game">
-        <Board
-          squares={squares}
-          onClick={i => this.handleClick(i)}
-        />
+        <Board squares={squares} onClick={i => this.handleClick(i)} />
         <div className="game-info">
           <div style={{fontWeight: winner ? 'bold' : 'normal'}}>{status}</div>
           <ol>{steps}</ol>

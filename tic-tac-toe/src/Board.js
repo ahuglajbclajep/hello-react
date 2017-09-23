@@ -14,12 +14,9 @@ function Square(props) {
 }
 
 export default function Board(props) {
-  const renderSquare = i => (
-        <Square
-          value={props.squares[i]}
-          onClick={() => props.onClick(i)}
-        />
-      );
+  function renderSquare(i) {
+    return <Square value={props.squares[i]} onClick={() => props.onClick(i)} />;
+  }
 
   return (
     <div>
