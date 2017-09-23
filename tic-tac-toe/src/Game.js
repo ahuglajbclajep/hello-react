@@ -2,6 +2,18 @@ import React from 'react';
 import Board from './Board'
 import './index.css';
 
+function Steps(props) {
+  const steps = props.history.map((squares, step) => (
+        <li key={step}>
+          <nav className="href" onClick={() => props.onClick(step)}>
+            {step ? 'Move #' + step : 'Game start'}
+          </nav>
+        </li>
+      ));
+
+  return <ol>{steps}</ol>;
+}
+
 export default class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +38,7 @@ export default class Game extends React.Component {
     }));
   }
 
-  jumpTo(step) {
+  handleSteps(step) {
     this.setState(prevState => ({
       history: prevState.history.slice(0, step + 1),
       step: step,
@@ -42,20 +54,12 @@ export default class Game extends React.Component {
     const status = winner ? 'Winner: ' + winner :
         'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
-    const steps = history.map((squares, step) => (
-          <li key={step}>
-            <nav className="href" onClick={() => this.jumpTo(step)}>
-              {step ? 'Move #' + step : 'Game start'}
-            </nav>
-          </li>
-        ));
-
     return (
       <div className="game">
         <Board squares={squares} onClick={i => this.handleClick(i)} />
         <div className="game-info">
           <div style={{fontWeight: winner ? 'bold' : 'normal'}}>{status}</div>
-          <ol>{steps}</ol>
+          <Steps history={history} onClick={this.handleSteps.bind(this)} />
         </div>
       </div>
     );
