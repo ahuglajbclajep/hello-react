@@ -56,7 +56,7 @@ export default class Game extends React.Component {
 
     return (
       <div className="game">
-        <Board squares={squares} onClick={i => this.handleClick(i)} />
+        <Board squares={squares} onClick={this.handleClick.bind(this)} />
         <div className="game-info">
           <div style={{fontWeight: winner ? 'bold' : 'normal'}}>{status}</div>
           <Steps history={history} onClick={this.handleSteps.bind(this)} />
