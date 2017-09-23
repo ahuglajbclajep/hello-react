@@ -19,7 +19,7 @@ export default class Game extends React.Component {
     if (squares[i] || judgeWinner(squares)) return;
     squares[i] = this.state.xIsNext ? 'X' : 'O';
 
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       history: history.concat([squares]),
       step: prevState.step + 1,
       xIsNext: !prevState.xIsNext
@@ -27,7 +27,7 @@ export default class Game extends React.Component {
   }
 
   jumpTo(step) {
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       history: prevState.history.slice(0, step + 1),
       step: step,
       xIsNext: !(step % 2)
@@ -57,7 +57,7 @@ export default class Game extends React.Component {
           onClick={i => this.handleClick(i)}
         />
         <div className="game-info">
-          <div>{status}</div>
+          <div style={{fontWeight: winner ? 'bold' : 'normal'}}>{status}</div>
           <ol>{steps}</ol>
         </div>
       </div>

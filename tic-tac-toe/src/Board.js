@@ -5,7 +5,7 @@ function Square(props) {
   return (
     <button
       className="square"
-      style={{color: props.value === 'X' ? "blue" : "red"}}
+      style={{color: props.value === 'X' ? 'blue' : 'red'}}
       onClick={props.onClick}
     >
       {props.value}
