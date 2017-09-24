@@ -28,11 +28,11 @@ function BoilingVerdict(props) {
 class TemperatureInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {temperature: ''};
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
-    this.setState({temperature: e.target.value});
+    this.props.onTemperatureChange(e.target.value);
   }
 
   render() {
@@ -44,22 +44,46 @@ class TemperatureInput extends React.Component {
     return (
       <fieldset>
         <legend>Enter temperature in {scaleNames[this.props.scale]}:</legend>
-        <input
-          value={this.state.temperature}
-          onChange={this.handleChange.bind(this)}
-        />
+        <input value={this.props.temperature} onChange={this.handleChange} />
       </fieldset>
     );
   }
 }
 
-function Calculator() {
-  return (
-    <div>
-      <TemperatureInput scale="c" />
-      <TemperatureInput scale="f" />
-    </div>
-  );
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {temperature: '', scale: 'c'};
+  }
+
+  handleCelsiusChange(temperature) {
+    this.setState({scale: 'c', temperature});
+  }
+
+  handleFahrenheitChange(temperature) {
+    this.setState({scale: 'f', temperature});
+  }
+
+  render() {
+    const scale = this.state.scale;
+    const temperature = this.state.temperature;
+    const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
+    const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
+
+    return (
+      <div>
+        <TemperatureInput
+          scale="c"
+          temperature={celsius}
+          onTemperatureChange={this.handleCelsiusChange.bind(this)} />
+        <TemperatureInput
+          scale="f"
+          temperature={fahrenheit}
+          onTemperatureChange={this.handleFahrenheitChange.bind(this)} />
+        <BoilingVerdict celsius={parseFloat(celsius)} />
+      </div>
+    );
+  }
 }
 
 ReactDOM.render(<Calculator />, document.getElementById('root'));
