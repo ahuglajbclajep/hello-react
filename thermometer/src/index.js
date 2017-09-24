@@ -20,8 +20,7 @@ function TemperatureInput(props) {
       <legend>Enter temperature in {scaleNames[props.scale]}:</legend>
       <input
         value={props.temperature}
-        onChange={(e) => props.onTemperatureChange(e.target.value)}
-      />
+        onChange={e => props.onTemperatureChange(e.target.value)} />
     </fieldset>
   );
 }
@@ -29,7 +28,7 @@ function TemperatureInput(props) {
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {temperature: '', scale: 'c'};
+    this.state = {scale: 'c', temperature: ''};
   }
 
   handleCelsiusChange(temperature) {
@@ -43,8 +42,8 @@ class Calculator extends React.Component {
   render() {
     const scale = this.state.scale;
     const temperature = this.state.temperature;
-    const celsius = scale === 'f' ? toCelsius(temperature) : temperature;
-    const fahrenheit = scale === 'c' ? toFahrenheit(temperature) : temperature;
+    const celsius = scale === 'c' ? temperature : toCelsius(temperature);
+    const fahrenheit = scale === 'f' ? temperature : toFahrenheit(temperature);
 
     return (
       <div>
