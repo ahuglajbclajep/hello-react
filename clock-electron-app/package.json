@@ -2,6 +2,8 @@
   "name": "clock-electron-app",
   "version": "0.1.0",
   "private": true,
+  "main" : "./src/main.js",
+  "homepage" : ".",
   "dependencies": {
     "electron": "^1.7.8",
     "react": "^15.6.1",
@@ -12,7 +14,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron": "electron ."
   },
   "eslintConfig": {
     "extends": "react-app"
