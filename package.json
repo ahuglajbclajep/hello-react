@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
-    "create-react-app": ""
-  },
-  "scripts": {
-    "create": "create-react-app"
+    "create-react-app": "^1.5.2"
   }
 }
