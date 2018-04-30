@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './style.css';
 
+
 const corols = ['red', 'blue', 'yellow'];
 
 export default class App extends Component {
@@ -21,19 +22,17 @@ export default class App extends Component {
     return (
       <div className='app'>
         <Canvas color={this.state.color} />
-        <Controller color={this.state.color} prev={this.prev.bind(this)} next={this.next.bind(this)} />
+        <NavBar color={this.state.color} prev={this.prev.bind(this)} next={this.next.bind(this)} />
       </div>
     );
   }
 }
 
 function Canvas(props) {
-  return (
-    <div className='canvas' style={{ backgroundColor: corols[props.color] }}></div>
-  );
+  return <div className='canvas' style={{ backgroundColor: corols[props.color] }}></div>;
 }
 
-function Controller(props) {
+function NavBar(props) {
   return (
     <nav>
       <button onClick={props.prev}>&laquo;</button>
