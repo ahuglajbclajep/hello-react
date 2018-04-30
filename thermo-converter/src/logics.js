@@ -10,4 +10,4 @@ function tryConvert(temperature, convert) {
 const toCelsius = f => tryConvert(f, f => (f - 32) * 5 / 9);
 const toFahrenheit = c => tryConvert(c, c => (c * 9 / 5) + 32);
 
-export {toCelsius, toFahrenheit};
+export { toCelsius, toFahrenheit };
