@@ -1,20 +1,10 @@
-import React from 'react';
-import Board from './Board'
+import React, { Component } from 'react';
+import Board from './Board';
+import { judgeWinner } from './logics';
 import './index.css';
 
-function Steps(props) {
-  const steps = props.history.map((squares, step) => (
-        <li key={step}>
-          <nav className="href" onClick={() => props.onClick(step)}>
-            {step ? 'Move #' + step : 'Game start'}
-          </nav>
-        </li>
-      ));
 
-  return <ol>{steps}</ol>;
-}
-
-export default class Game extends React.Component {
+export default class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,13 +14,13 @@ export default class Game extends React.Component {
     };
   }
 
-  handleClick(i) {
+  handleMark(i) {
     const history = this.state.history;
     const squares = history[history.length - 1].slice();
 
     if (squares[i] || judgeWinner(squares)) return;
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
 
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState(prevState => ({
       history: history.concat([squares]),
       step: prevState.step + 1,
@@ -38,7 +28,7 @@ export default class Game extends React.Component {
     }));
   }
 
-  handleSteps(step) {
+  handleJump(step) {
     this.setState(prevState => ({
       history: prevState.history.slice(0, step + 1),
       step: step,
@@ -51,36 +41,30 @@ export default class Game extends React.Component {
     const squares = history[history.length - 1];
 
     const winner = judgeWinner(squares);
-    const status = winner ? 'Winner: ' + winner :
-        'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    const status = winner ? 'Winner: ' + winner
+        : 8 < this.state.step ? 'Draw'
+        : 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
     return (
-      <div className="game">
-        <Board squares={squares} onClick={this.handleClick.bind(this)} />
-        <div className="game-info">
-          <div style={{fontWeight: winner ? 'bold' : 'normal'}}>{status}</div>
-          <Steps history={history} onClick={this.handleSteps.bind(this)} />
+      <div className='game'>
+        <Board squares={squares} mark={this.handleMark.bind(this)} />
+        <div className='game-info'>
+          <p style={{ fontWeight: winner ? 'bold' : 'unset' }}>{status}</p>
+          <Steps history={history} jump={this.handleJump.bind(this)} />
         </div>
       </div>
     );
   }
 }
 
-function judgeWinner(squares) {
-  const winPatterns = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
+function Steps(props) {
+  const steps = props.history.map((squares, step) => (
+        <li key={step}>
+          <nav className='href' onClick={() => props.jump(step)}>
+            {step ? 'Move #' + step : 'Game start'}
+          </nav>
+        </li>
+      ));
 
-  for (let i = 0; i < winPatterns.length; i++) {
-    const [a, b, c] = winPatterns[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) return squares[a];
-  }
-  return null;
+  return <ol>{steps}</ol>;
 }

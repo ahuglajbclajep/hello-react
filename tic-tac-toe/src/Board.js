@@ -1,22 +1,9 @@
 import React from 'react';
 import './index.css';
 
-function Square(props) {
-  return (
-    <button
-      className="square"
-      style={{color: props.value === 'X' ? 'blue' : 'red'}}
-      onClick={props.onClick}
-    >
-      {props.value}
-    </button>
-  );
-}
 
 export default function Board(props) {
-  function renderSquare(i) {
-    return <Square value={props.squares[i]} onClick={() => props.onClick(i)} />;
-  }
+  const renderSquare = i => <Square value={props.squares[i]} mark={() => props.mark(i)} />;
 
   return (
     <div>
@@ -36,5 +23,17 @@ export default function Board(props) {
         {renderSquare(8)}
       </div>
     </div>
+  );
+}
+
+function Square(props) {
+  return (
+    <button
+      className='square'
+      style={{ color: props.value === 'X' ? 'blue' : 'red' }}
+      onClick={props.mark}
+    >
+      {props.value}
+    </button>
   );
 }

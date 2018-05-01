@@ -38,7 +38,6 @@ export default class Converter extends Component {
   }
 }
 
-
 function TemperatureInput(props) {
   const scaleNames = {
     c: 'Celsius',
