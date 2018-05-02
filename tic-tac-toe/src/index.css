@@ -7,8 +7,16 @@ body {
   margin: 20px;
 }
 
-ol, ul {
-  padding-left: 30px;
+.game {
+  display: flex;
+}
+
+.game-info {
+  margin-left: 20px;
+}
+
+.game-info > ol {
+  padding-left: 20px;
 }
 
 .href {
@@ -31,13 +39,4 @@ ol, ul {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-}
-
-.game {
-  display: flex;
-  flex-direction: row;
-}
-
-.game-info {
-  margin-left: 20px;
 }
