@@ -16,13 +16,13 @@ export default class Game extends Component {
 
   handleMark(i) {
     const history = this.state.history;
-    const squares = history[history.length - 1].slice();
+    const board = history[history.length - 1].slice();
 
-    if (squares[i] || judgeWinner(squares)) return;
+    if (board[i] || judgeWinner(board)) return;
 
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    board[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState(prevState => ({
-      history: history.concat([squares]),
+      history: history.concat([board]),
       step: prevState.step + 1,
       xIsNext: !prevState.xIsNext
     }));
@@ -38,19 +38,19 @@ export default class Game extends Component {
 
   render() {
     const history = this.state.history;
-    const squares = history[history.length - 1];
+    const board = history[history.length - 1];
 
-    const winner = judgeWinner(squares);
+    const winner = judgeWinner(board);
     const status = winner ? 'Winner: ' + winner
         : 8 < this.state.step ? 'Draw'
         : 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
     return (
       <div className='game'>
-        <Board squares={squares} mark={this.handleMark.bind(this)} />
+        <Board marks={board} hMark={this.handleMark.bind(this)} />
         <div className='game-info'>
           <p style={{ fontWeight: winner ? 'bold' : 'unset' }}>{status}</p>
-          <Steps history={history} jump={this.handleJump.bind(this)} />
+          <Steps history={history} hJump={this.handleJump.bind(this)} />
         </div>
       </div>
     );
@@ -60,7 +60,7 @@ export default class Game extends Component {
 function Steps(props) {
   const steps = props.history.map((squares, step) => (
         <li key={step}>
-          <nav className='href' onClick={() => props.jump(step)}>
+          <nav className='href' onClick={() => props.hJump(step)}>
             {step ? 'Move #' + step : 'Game start'}
           </nav>
         </li>

@@ -1,3 +1,7 @@
+:focus {
+  outline: none;
+}
+
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
@@ -7,33 +11,26 @@ ol, ul {
   padding-left: 30px;
 }
 
-.status {
-  margin-bottom: 10px;
-}
-
 .href {
   color: blue;
   text-decoration: underline;
   cursor: pointer;
 }
 
-.square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 34px;
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 33px);
+  grid-auto-rows: 33px;
 }
 
-.square:focus {
-  outline: none;
+.board > button {
+  border: 1px solid #999;
+  margin-top: -1px;
+  margin-left: -1px;
+  background-color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .game {

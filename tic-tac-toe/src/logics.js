@@ -1,4 +1,4 @@
-export function judgeWinner(squares) {
+export function judgeWinner(marks) {
   const winPatterns = [
     [0, 1, 2],
     [3, 4, 5],
@@ -11,7 +11,7 @@ export function judgeWinner(squares) {
   ];
 
   for (const [a, b, c] of winPatterns) {
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) return squares[a];
+    if (marks[a] && marks[a] === marks[b] && marks[a] === marks[c]) return marks[a];
   }
   return null;
 }

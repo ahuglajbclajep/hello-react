@@ -3,37 +3,18 @@ import './index.css';
 
 
 export default function Board(props) {
-  const renderSquare = i => <Square value={props.squares[i]} mark={() => props.mark(i)} />;
+  const squares = props.marks.map((m, i) => <Square mark={m} key={i + m} hMark={() => props.hMark(i)} />);
 
-  return (
-    <div>
-      <div>
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </div>
-      <div>
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div>
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
-    </div>
-  );
+  return <div className='board'>{squares}</div>;
 }
 
 function Square(props) {
   return (
     <button
-      className='square'
-      style={{ color: props.value === 'X' ? 'blue' : 'red' }}
-      onClick={props.mark}
+      style={{ color: props.mark === 'X' ? 'blue' : 'red' }}
+      onClick={props.hMark}
     >
-      {props.value}
+      {props.mark}
     </button>
   );
 }
