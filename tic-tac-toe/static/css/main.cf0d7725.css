@@ -1,0 +1,2 @@
+:focus{outline:none}body{font:14px Century Gothic,Futura,sans-serif;margin:20px}.game{display:-ms-flexbox;display:flex}.game-info{margin-left:20px}.game-info>ol{padding-left:20px}.href{color:blue;text-decoration:underline;cursor:pointer}.board{display:grid;grid-template-columns:repeat(3,33px);grid-auto-rows:33px}.board>button{border:1px solid #999;margin-top:-1px;margin-left:-1px;background-color:#fff;font-size:24px;font-weight:700;text-align:center}
+/*# sourceMappingURL=main.cf0d7725.css.map*/
