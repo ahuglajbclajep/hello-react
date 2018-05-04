@@ -1,3 +1,4 @@
 # react-sandbox
-Here is the sandbox of [React](https://github.com/facebook/react) app.  
-*clock-electron-app* move to *[electron-react-example](https://github.com/ahuglajbclajep/electron-react-example)*.
+Sandbox of [React](https://reactjs.org/) app. Here is the [demo page](https://ahuglajbclajep.github.io/react-sandbox/).
+
+*clock-electron-app* move to [electron-react-example](https://github.com/ahuglajbclajep/electron-react-example).
