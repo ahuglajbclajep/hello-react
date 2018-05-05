@@ -5,20 +5,23 @@ if [ $# -lt 2 ]; then
   exit 1
 fi
 
-tmpdir=`mktemp -d`
-
 for dir in ${@:2}; do
   cd $dir
-  npm i
   npm run build
-  mv build $tmpdir/$dir
   cd ..
 done
 
-git checkout gh-pages
-git clean -df
-git rm -rq --ignore-unmatch ${@:2}
-mv $tmpdir/* .
-git add -A
-git commit -m $1
+if [ `git branch --list gh-pages` ]; then
+  git checkout gh-pages
+  git rm -rq --ignore-unmatch ${@:2}
+else
+  git checkout --orphan gh-pages
+  git rm -rfq .
+  echo 'node_modules' > .gitignore
+fi
 
+for dir in ${@:2}; do
+  mv $dir/build/* $dir
+done
+git add -A
+git commit -m "$1"
