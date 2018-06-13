@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 if [ $# -lt 2 ]; then
-  echo '引数が足りません'
+  echo 'コミットメッセージとプロジェクトの指定が必要です'
   exit 1
 fi
 
