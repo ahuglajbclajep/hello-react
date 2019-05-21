@@ -3,7 +3,7 @@
   min-width: 120px;
 }
 
-.app > .canvas {
+.app > .rect {
   padding-top: 100%;
   border-radius: 10px;
 }
