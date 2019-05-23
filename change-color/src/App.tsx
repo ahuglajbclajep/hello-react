@@ -1,18 +1,18 @@
 import React from "react";
 
-const Rect: React.FunctionComponent<{ color: string }> = props => (
-  <div className="rect" style={{ backgroundColor: props.color }} />
+const Rect: React.FunctionComponent<{ color: string }> = ({ color }) => (
+  <div className="rect" style={{ backgroundColor: color }} />
 );
 
 const NavBar: React.FunctionComponent<{
   color: string;
   prev: (e: React.MouseEvent<HTMLButtonElement>) => void;
   next: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}> = props => (
+}> = ({ color, prev, next }) => (
   <nav>
-    <button onClick={props.prev}>&laquo;</button>
-    {props.color}
-    <button onClick={props.next}>&raquo;</button>
+    <button onClick={prev}>&laquo;</button>
+    {color}
+    <button onClick={next}>&raquo;</button>
   </nav>
 );
 
@@ -20,21 +20,17 @@ type State = { index: number };
 
 export default class App extends React.Component<{}, State> {
   private corols = ["red", "blue", "yellow"];
-
-  constructor(props: {}) {
-    super(props);
-    this.state = { index: 0 };
-  }
+  state = { index: 0 };
 
   prev() {
-    this.setState(state => ({
-      index: state.index === 0 ? this.corols.length - 1 : state.index - 1
+    this.setState(({ index }) => ({
+      index: index === 0 ? this.corols.length - 1 : index - 1
     }));
   }
 
   next() {
-    this.setState(state => ({
-      index: this.corols.length - 1 === state.index ? 0 : state.index + 1
+    this.setState(({ index }) => ({
+      index: this.corols.length - 1 === index ? 0 : index + 1
     }));
   }
 
