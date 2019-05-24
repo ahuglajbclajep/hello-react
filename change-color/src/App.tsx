@@ -1,24 +1,37 @@
 import React from "react";
+import styled from "styled-components";
 
-const Rect: React.FunctionComponent<{ color: string }> = ({ color }) => (
-  <div className="rect" style={{ backgroundColor: color }} />
-);
+const StyledApp = styled.div`
+  width: 10vw;
+  min-width: 150px;
+`;
+
+const Rect = styled.div<{ color: string }>`
+  padding-top: 100%;
+  border-radius: 1rem;
+  background-color: ${props => props.color};
+`;
+
+const StyledNav = styled.nav`
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const NavBar: React.FunctionComponent<{
   color: string;
   prev: (e: React.MouseEvent<HTMLButtonElement>) => void;
   next: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }> = ({ color, prev, next }) => (
-  <nav>
+  <StyledNav>
     <button onClick={prev}>&laquo;</button>
     {color}
     <button onClick={next}>&raquo;</button>
-  </nav>
+  </StyledNav>
 );
 
-type State = { index: number };
-
-export default class App extends React.Component<{}, State> {
+export default class App extends React.Component<{}, { index: number }> {
   private corols = ["red", "blue", "yellow"];
   state = { index: 0 };
 
@@ -36,14 +49,14 @@ export default class App extends React.Component<{}, State> {
 
   render() {
     return (
-      <div className="app">
+      <StyledApp>
         <Rect color={this.corols[this.state.index]} />
         <NavBar
           color={this.corols[this.state.index]}
           prev={this.prev.bind(this)}
           next={this.next.bind(this)}
         />
-      </div>
+      </StyledApp>
     );
   }
 }
