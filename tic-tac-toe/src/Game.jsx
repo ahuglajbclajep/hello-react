@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Board from './Board';
+import { Board, History } from "./components";
 import { judgeWinner } from './logic';
 import './index.css';
 
@@ -47,24 +47,12 @@ export default class Game extends Component {
 
     return (
       <div className='game'>
-        <Board marks={board} hMark={this.handleMark.bind(this)} />
+        <Board board={board} onMark={this.handleMark.bind(this)} />
         <div className='game-info'>
           <p style={{ fontWeight: winner ? 'bold' : 'unset' }}>{status}</p>
-          <Steps history={history} hJump={this.handleJump.bind(this)} />
+          <History history={history} onJump={this.handleJump.bind(this)} />
         </div>
       </div>
     );
   }
-}
-
-function Steps(props) {
-  const steps = props.history.map((squares, step) => (
-        <li key={step}>
-          <nav className='href' onClick={() => props.hJump(step)}>
-            {step ? 'Move #' + step : 'Game start'}
-          </nav>
-        </li>
-      ));
-
-  return <ol>{steps}</ol>;
 }
