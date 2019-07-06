@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Board from './Board';
-import { judgeWinner } from './logics';
+import { judgeWinner } from './logic';
 import './index.css';
 
 
