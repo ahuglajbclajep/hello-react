@@ -7,7 +7,6 @@ module.exports = (env, args) => {
   return {
     ...baseConfig,
     ...{
-      entry: "./src/index.jsx",
       module: {
         rules: [
           ...baseConfig.module.rules,
@@ -17,11 +16,7 @@ module.exports = (env, args) => {
           }
         ]
       },
-      plugins: [
-        ...baseConfig.plugins,
-        new MiniCssExtractPlugin({ filename: "style.css" })
-      ],
-      resolve: { extensions: [...baseConfig.resolve.extensions, ".jsx"] }
+      plugins: [...baseConfig.plugins, new MiniCssExtractPlugin()]
     }
   };
 };
