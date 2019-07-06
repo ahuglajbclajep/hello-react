@@ -11,11 +11,11 @@ const Square: React.FunctionComponent<{
 
 const Board: React.FunctionComponent<{
   board: Mark[];
-  onMark: (position: number) => void;
-}> = ({ board, onMark }) => {
+  createOnMark: (position: number) => () => void;
+}> = ({ board, createOnMark }) => {
   const squares = board.map((mark, pos) => (
     // `pos + mark` is `pos` if `mark` is `null`.
-    <Square mark={mark} key={pos + mark!} onMark={() => onMark(pos)} />
+    <Square mark={mark} key={pos + mark!} onMark={createOnMark(pos)} />
   ));
 
   return <div className="board">{squares}</div>;
@@ -23,11 +23,11 @@ const Board: React.FunctionComponent<{
 
 const History: React.FunctionComponent<{
   history: Mark[][];
-  onJump: (step: number) => void;
-}> = ({ history, onJump }) => {
+  createOnJump: (step: number) => () => void;
+}> = ({ history, createOnJump }) => {
   const steps = history.map((_, step) => (
     <li key={step}>
-      <nav className="href" onClick={() => onJump(step)}>
+      <nav className="href" onClick={createOnJump(step)}>
         {step ? `Move #${step}` : "Game start"}
       </nav>
     </li>

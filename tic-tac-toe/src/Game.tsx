@@ -30,23 +30,25 @@ export default class Game extends React.Component<{}, State> {
     xIsNext: true
   };
 
-  handleMark(position: number) {
-    const history = this.state.history.slice(0, this.state.step + 1);
-    const board = history[history.length - 1];
-    // do nothing if `board[position]` is not `null` or there is a winner.
-    if (board[position] || judgeWinner(board)) return;
+  createOnMark(position: number) {
+    return () => {
+      const history = this.state.history.slice(0, this.state.step + 1);
+      const board = history[history.length - 1];
+      // do nothing if `board[position]` is not `null` or there is a winner.
+      if (board[position] || judgeWinner(board)) return;
 
-    const newBoard = [...board];
-    newBoard[position] = this.state.xIsNext ? "X" : "O";
-    this.setState(({ step, xIsNext }) => ({
-      history: [...history, newBoard],
-      step: step + 1,
-      xIsNext: !xIsNext
-    }));
+      const newBoard = [...board];
+      newBoard[position] = this.state.xIsNext ? "X" : "O";
+      this.setState(({ step, xIsNext }) => ({
+        history: [...history, newBoard],
+        step: step + 1,
+        xIsNext: !xIsNext
+      }));
+    };
   }
 
-  handleJump(step: number) {
-    this.setState({ step: step, xIsNext: !(step % 2) });
+  createOnJump(step: number) {
+    return () => this.setState({ step: step, xIsNext: !(step % 2) });
   }
 
   render() {
@@ -60,12 +62,12 @@ export default class Game extends React.Component<{}, State> {
 
     return (
       <div className="game">
-        <Board board={board} onMark={this.handleMark.bind(this)} />
+        <Board board={board} createOnMark={this.createOnMark.bind(this)} />
         <div className="game-info">
           <p style={{ fontWeight: winner ? "bold" : "unset" }}>{status}</p>
           <History
             history={this.state.history}
-            onJump={this.handleJump.bind(this)}
+            createOnJump={this.createOnJump.bind(this)}
           />
         </div>
       </div>
