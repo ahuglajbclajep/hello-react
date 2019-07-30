@@ -12,7 +12,12 @@ module.exports = (env, { mode }) => ({
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin({ template: "src/index.html" })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "../index.ejs",
+      title: process.env.npm_package_name
+    })
+  ],
   resolve: {
     extensions: [".ts", ".tsx", ".js"]
   },
