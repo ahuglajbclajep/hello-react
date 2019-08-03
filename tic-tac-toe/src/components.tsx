@@ -15,6 +15,7 @@ const Board: React.FunctionComponent<{
 }> = ({ board, createOnMark }) => {
   const squares = board.map((mark, pos) => (
     // `pos + mark` is `pos` if `mark` is `null`.
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     <Square mark={mark} key={pos + mark!} onMark={createOnMark(pos)} />
   ));
 
