@@ -1,4 +1,6 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin"); // from webpack
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const base = require("../webpack.config");
 
 module.exports = (env, args) => {
@@ -16,7 +18,10 @@ module.exports = (env, args) => {
           }
         ]
       },
-      plugins: [...baseConfig.plugins, new MiniCssExtractPlugin()]
+      plugins: [...baseConfig.plugins, new MiniCssExtractPlugin()],
+      optimization: {
+        minimizer: [new TerserPlugin(), new OptimizeCssAssetsPlugin()]
+      }
     }
   };
 };
