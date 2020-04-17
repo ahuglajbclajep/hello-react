@@ -1,0 +1,10 @@
+// see https://code.visualstudio.com/docs/editor/extension-gallery#_workspace-recommended-extensions
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    // to ignore the bundled prettier, prepare an empty .prettierrc and install the prettier from package.json
+    // see https://github.com/prettier/prettier-vscode/issues/1290
+    "esbenp.prettier-vscode",
+    "stylelint.vscode-stylelint"
+  ]
+}
