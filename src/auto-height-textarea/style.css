@@ -1,0 +1,4 @@
+.auto-height-textarea {
+  overflow-y: hidden;
+  resize: none;
+}

@@ -1,5 +1,22 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { lazy, Suspense } from "react";
+import { render } from "react-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import "./style.css";
 
-ReactDOM.render(<h1>Hello, React!</h1>, document.getElementById("root"));
+// see https://reactjs.org/docs/code-splitting.html#route-based-code-splitting
+const AutoHeightTextarea = lazy(() =>
+  import("./auto-height-textarea/AutoHeightTextarea")
+);
+
+const App: React.FC = () => (
+  <Router>
+    <h1>react-sandbox</h1>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Route path="/auto-height-textarea">
+        <AutoHeightTextarea />
+      </Route>
+    </Suspense>
+  </Router>
+);
+
+render(<App />, document.getElementById("root"));
