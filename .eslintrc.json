@@ -16,7 +16,8 @@
     "prettier/react"
   ],
   "rules": {
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/display-name": "off"
   },
   "overrides": [
     // see https://github.com/typescript-eslint/typescript-eslint/issues/906

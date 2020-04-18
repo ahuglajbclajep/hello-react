@@ -7,6 +7,7 @@ import "./style.css";
 const AutoHeightTextarea = lazy(() =>
   import("./auto-height-textarea/AutoHeightTextarea")
 );
+const Counter = lazy(() => import("./counter-with-reducer/Counter"));
 
 const App: React.FC = () => (
   <Router>
@@ -14,6 +15,9 @@ const App: React.FC = () => (
     <Suspense fallback={<div>Loading...</div>}>
       <Route path="/auto-height-textarea">
         <AutoHeightTextarea />
+      </Route>
+      <Route path="/counter-with-reducer">
+        <Counter />
       </Route>
     </Suspense>
   </Router>
