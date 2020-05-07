@@ -12,10 +12,12 @@ const App: React.FC = () => (
   <Router>
     <Suspense fallback={<div>Loading...</div>}>
       <Header />
-      <Switch>
-        <Route path="/auto-height-textarea" component={AutoHeightTextarea} />
-        <Route path="/counter-with-reducer" component={CounterWithReducer} />
-      </Switch>
+      <article className="main-content">
+        <Switch>
+          <Route path="/auto-height-textarea" component={AutoHeightTextarea} />
+          <Route path="/counter-with-reducer" component={CounterWithReducer} />
+        </Switch>
+      </article>
     </Suspense>
   </Router>
 );
